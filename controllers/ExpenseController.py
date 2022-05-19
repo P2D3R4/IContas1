@@ -74,6 +74,7 @@ class ExpenseController():
         expense.title = request.form.get('title')
         expense.value = request.form.get('value')
         expense.due_date = datetime.strptime(request.form.get('due_date'), '%Y-%m-%d').date()
+        db.session.commit()
     
         flash('Despesa editada com sucesso', 'success')
         return redirect('/dashboard')
@@ -106,7 +107,7 @@ class ExpenseController():
             flash('Despesa não encontrada', 'error')
             return redirect('/dashboard')
 
-        expense.paid=True
+        expense.paid=False
         db.session.commit()
     
         flash('Despesa não paga', 'success')
